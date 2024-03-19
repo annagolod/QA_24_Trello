@@ -9,6 +9,7 @@ public class ApplicationManager {
 
     WebDriver driver;
     HelperUser helperUser;
+    HelperBoards helperBoards;
 
     public void init(){
         driver = new ChromeDriver();
@@ -16,6 +17,7 @@ public class ApplicationManager {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         helperUser = new HelperUser(driver);
+        helperBoards = new HelperBoards(driver);
 
     }
 
@@ -26,5 +28,9 @@ public class ApplicationManager {
     public HelperUser getHelperUser(){
         return helperUser;
 
+    }
+
+    public HelperBoards getHelperBoards(){
+        return helperBoards;
     }
 }

@@ -7,9 +7,10 @@ public class LoginTests extends  TestBase {
 
     @Test
     public void loginPositiveTest(){
-        String email = "tretam0810@gmail.com";
-        String password = "Trello54321#";
-        app.getHelperUser().login(email, password);
+//        String email = "tretam0810@gmail.com";
+//        String password = "Trello54321#";
+
+        app.getHelperUser().login(user.getEmail(), user.getPassword());
         Assert.assertTrue(app.getHelperUser().isElementPresent_btnAccount());
     }
 
