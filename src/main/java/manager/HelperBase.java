@@ -1,8 +1,11 @@
 package manager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -24,6 +27,11 @@ public class HelperBase {
 
     public void clickBase(By locator){
         findElementBase(locator).click();
+    }
+    public void clickBaseWait(By locator, int time){
+        WebElement element = findElementBase(locator);
+        new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(element)).click();
+
     }
 
     public void typeBase(By locator, String text){
@@ -49,6 +57,14 @@ public class HelperBase {
             throw new RuntimeException(e);
         }
 
+    }
+    public boolean textToBePresentInElement(By locator, String text, int time){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, time);
+            return wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
+        }catch (Exception e){
+            return false;
+        }
     }
 
 }
