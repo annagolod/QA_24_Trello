@@ -18,10 +18,6 @@ public class WDListener extends AbstractWebDriverEventListener {
         super();
     }
 
-
-
-
-
     @Override
     public void beforeNavigateTo(String url, WebDriver driver) {
         super.beforeNavigateTo(url, driver);

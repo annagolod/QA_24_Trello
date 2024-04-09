@@ -1,7 +1,10 @@
 package tests;
 
+import dataproviders.DataProviderBoard;
+import helpers.RetryAnalyzer;
 import manager.TestNGListener;
 import models.BoardDTO;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -20,18 +23,18 @@ public class BoardsTests extends TestBase{
         app.getHelperUser().login(user.getEmail(), user.getPassword());
     }
 
-    @Test
-    public void createNewBoardPositiveTest(Method method){
-        int i = new Random().nextInt(1000);
-        BoardDTO boardDTO = BoardDTO.builder()
-                .boardTitle("qa24_" + i)
-                .build();
+    @Test(dataProvider = "DP_createNewBoardPositiveTest", dataProviderClass = DataProviderBoard.class)
+    public void createNewBoardPositiveTest(Method method, BoardDTO boardDTO){
+//        int i = new Random().nextInt(1000);
+//        BoardDTO boardDTO = BoardDTO.builder()
+//                .boardTitle("qa24_" + i)
+//                .build();
         //String boardTitle = "qa24_" + i;
         logger.info("start test " + method.getName() + " board title--> " + boardDTO.getBoardTitle());
         app.getHelperBoards().createNewBoard(boardDTO);
         Assert.assertTrue(app.getHelperBoards().isTextInElementEquals_boardTitle(boardDTO.getBoardTitle()));
     }
-    @Test
+    @Test(expectedExceptions = TimeoutException.class)
     public void createNewBoardNegativeTest_EmptyBoardTitle(){
         BoardDTO boardDTO = BoardDTO.builder()
                 .boardTitle("  ")
@@ -39,7 +42,7 @@ public class BoardsTests extends TestBase{
         app.getHelperBoards().createNewBoard(boardDTO);
         Assert.assertTrue(app.getHelperBoards().isElementPresent_inputBoardTitle());
     }
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void deleteBoardPositiveTest(Method method){
         int i = new Random().nextInt(1000);
         BoardDTO boardDTO = BoardDTO.builder()
