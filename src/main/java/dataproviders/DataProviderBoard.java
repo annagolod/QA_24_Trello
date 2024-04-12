@@ -3,6 +3,7 @@ package dataproviders;
 import models.BoardDTO;
 import org.testng.annotations.DataProvider;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,4 +20,25 @@ public class DataProviderBoard {
         return list.iterator();
 
     }
+
+    @DataProvider
+    public Iterator<Object[]> DPFile_createNewBoardPositiveTest() {
+        List<Object[]> list = new ArrayList<>();
+        String path = "src/test/resources/Board_titles.csv";
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(new File(path)));
+            String line = reader.readLine();
+            while(line != null){
+                String[] splitArray = line.split(",");
+                list.add(new BoardDTO[]{BoardDTO.builder().boardTitle(splitArray[0]).build()});
+                line = reader.readLine();
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return list.iterator();
+    }
+
 }
