@@ -87,4 +87,8 @@ public class HelperProfile extends HelperBase{
     public boolean isTextToBePresentInAttribute_format_invalid(String attribute, String text, int time){
         return textToBePresentInAttribute(imgWithText,attribute,text,time);
     }
+
+    public void clickCancel() {
+        clickBaseWait(btnCancelAddChangeProfilePhoto, 5);
+    }
 }
