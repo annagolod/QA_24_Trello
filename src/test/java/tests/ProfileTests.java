@@ -31,7 +31,7 @@ public class ProfileTests extends TestBase{
         app.getHelperProfile().changeAvatar("");
         Assert.assertTrue(app.getHelperProfile()
                 .isTextToBePresentInAttribute_format_invalid
-                        ("alt", "Не удалось загрузить изображение (недействительный формат).", 5));
+                        ("alt", "Could not load image, the format is invalid.", 5));
         app.getHelperProfile().clickCancel();
     }
 
