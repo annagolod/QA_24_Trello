@@ -14,13 +14,15 @@ public class TestBase {
     static ApplicationManager app = new ApplicationManager();
     UserDTO user = new UserDTO("tretam0810@gmail.com","Trello54321#");
 
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
     public void setUp(){
         logger.info("Login with email --> " + user.getEmail() + " password --> " + user.getPassword());
         app.init();
+        app.getHelperUser().login(user.getEmail(), user.getPassword());
+
     }
 
-    @AfterSuite
+    @AfterSuite(alwaysRun = true)
     public void tearDown(){
         app.stop();
     }

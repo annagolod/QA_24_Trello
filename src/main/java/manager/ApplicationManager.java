@@ -3,6 +3,8 @@ package manager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,11 +20,23 @@ public class ApplicationManager {
     HelperUser helperUser;
     HelperBoards helperBoards;
     HelperProfile helperProfile;
+    static String browser;
+    public ApplicationManager(){
+        browser = System.getProperty("browser", BrowserType.CHROME);
+    }
 
     public void init() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--lang=en");
-        driver = new EventFiringWebDriver(new ChromeDriver());
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--lang=en");
+//        driver = new EventFiringWebDriver(new ChromeDriver());
+        if(browser.equals(BrowserType.FIREFOX)){
+            driver = new EventFiringWebDriver(new FirefoxDriver());
+            logger.info("testing starts on Firefox");
+        }else{
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--lang=en");
+            driver = new EventFiringWebDriver(new ChromeDriver());
+        }
         driver.navigate().to("https://trello.com");
         logger.info("Start testing--navigate to --> https://trello.com");
         driver.manage().window().maximize();

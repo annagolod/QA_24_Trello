@@ -80,4 +80,10 @@ public class HelperProfile extends HelperBase{
     public void clickCancel() {
         clickBaseWait(btnCancelAddChangeProfilePhoto, 5);
     }
+
+    public void goToTrelloBoards() {
+        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.close();
+        driver.switchTo().window(tabs.get(0));
+    }
 }
