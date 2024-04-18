@@ -4,11 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
@@ -30,6 +33,7 @@ public class ApplicationManager {
 //        options.addArguments("--lang=en");
 //        driver = new EventFiringWebDriver(new ChromeDriver());
         if(browser.equals(BrowserType.FIREFOX)){
+            System.setProperty("webdriver.firefox.bin", "/Applications/Firefox.app/Contents/MacOS/firefox");
             driver = new EventFiringWebDriver(new FirefoxDriver());
             logger.info("testing starts on Firefox");
         }else{
@@ -46,6 +50,7 @@ public class ApplicationManager {
         driver.register(new WDListener());
         helperProfile = new HelperProfile(driver);
     }
+
 
     public void stop() {
         logger.info("Stop testing -- navigate to --> https://trello.com");
