@@ -23,7 +23,7 @@ public class BoardsTests extends TestBase {
 //        app.getHelperUser().login(user.getEmail(), user.getPassword());
 //    }
 
-    @Test(groups = {"smoke"}, dataProvider = "DP_createNewBoardPositiveTest", dataProviderClass = DataProviderBoard.class)
+    @Test(dataProvider = "DP_createNewBoardPositiveTest", dataProviderClass = DataProviderBoard.class)
     public void createNewBoardPositiveTest(Method method, BoardDTO boardDTO) {
 //        int i = new Random().nextInt(1000);
 //        BoardDTO boardDTO = BoardDTO.builder()
@@ -46,7 +46,7 @@ public class BoardsTests extends TestBase {
 
     }
 
-    @Test//(retryAnalyzer = RetryAnalyzer.class)
+    @Test(groups = {"smoke"})//(retryAnalyzer = RetryAnalyzer.class)
     public void deleteBoardPositiveTest(Method method) {
         int i = new Random().nextInt(1000);
         BoardDTO boardDTO = BoardDTO.builder()

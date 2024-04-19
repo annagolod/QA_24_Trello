@@ -41,7 +41,7 @@ public class ApplicationManager {
             options.addArguments("--lang=en");
             driver = new EventFiringWebDriver(new ChromeDriver());
         }
-        driver.navigate().to("https://trello.com");
+        driver.navigate().to(PropertiesReader.getProperty("url"));
         logger.info("Start testing--navigate to --> https://trello.com");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -54,7 +54,7 @@ public class ApplicationManager {
 
     public void stop() {
         logger.info("Stop testing -- navigate to --> https://trello.com");
-        //driver.quit();
+        driver.quit();
     }
 
     public HelperUser getHelperUser() {
